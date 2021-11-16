@@ -31,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 height: 30,
               ),
               Text(
-                "flutter",
+                "Hello Flutter",
                 style: TextStyle(fontSize: 60, color: Colors.white),
               ),
             ],
