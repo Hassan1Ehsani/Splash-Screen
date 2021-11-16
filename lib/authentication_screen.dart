@@ -13,57 +13,59 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: 2,
-        child: Scaffold(
-          appBar: AppBar(
-            flexibleSpace: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.blueAccent, Colors.redAccent],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-              ),
-            ),
-            title: Text(
-              "Hello",
-              style: TextStyle(fontSize: 60, color: Colors.white),
-            ),
-            centerTitle: true,
-            bottom: TabBar(
-              tabs: [
-                Tab(
-                  icon: Icon(
-                    Icons.lock,
-                    color: Colors.white,
-                  ),
-                  text: "Login",
-                ),
-                Tab(
-                  icon: Icon(
-                    Icons.person,
-                    color: Colors.white,
-                  ),
-                  text: "Register",
-                ),
-              ],
-            ),
-          ),
-          body: Container(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          flexibleSpace: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [Colors.redAccent, Colors.blueAccent],
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
+                colors: [Colors.blueAccent, Colors.redAccent],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
               ),
             ),
-            child: TabBarView(
-              children: [
-                Login(),
-                Register(),
-              ],
+          ),
+          title: Text(
+            "Hello",
+            style: TextStyle(fontSize: 40, color: Colors.white),
+          ),
+          centerTitle: true,
+          bottom: TabBar(
+            indicatorWeight: 7,
+            tabs: [
+              Tab(
+                icon: Icon(
+                  Icons.lock,
+                  color: Colors.white,
+                ),
+                text: "Login",
+              ),
+              Tab(
+                icon: Icon(
+                  Icons.person,
+                  color: Colors.white,
+                ),
+                text: "Register",
+              ),
+            ],
+          ),
+        ),
+        body: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.redAccent, Colors.blueAccent],
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
             ),
           ),
-        ));
+          child: TabBarView(
+            children: [
+              Login(),
+              Register(),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
