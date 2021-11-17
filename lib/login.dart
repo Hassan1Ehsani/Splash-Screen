@@ -36,9 +36,24 @@ class _LoginState extends State<Login> {
                   CustomTextField(
                       _emailController, Icons.person, 'Email', false),
                   // controller:_emailController, data:Icons.person, hintText:'Email', isObsecure:false
-                  CustomTextField(_passwordController,Icons.lock,'passwprd',true),
+                  CustomTextField(
+                      _passwordController, Icons.lock, 'passwprd', true),
                 ],
               ),
+            ),
+            SizedBox(height: 10),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.5,
+              child: ElevatedButton(
+                onPressed: () {},
+                child: Text(
+                  'Log in',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 50,
             ),
           ],
         ),
