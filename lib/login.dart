@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:splash_screen/widgets/custom_text_field.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -22,7 +23,21 @@ class _LoginState extends State<Login> {
             Container(
               child: Padding(
                 padding: EdgeInsets.all(15),
-                child: Image.asset('images/intro.png',height: 250,),
+                child: Image.asset(
+                  'images/intro.png',
+                  height: 250,
+                ),
+              ),
+            ),
+            Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  CustomTextField(
+                      _emailController, Icons.person, 'Email', false),
+                  // controller:_emailController, data:Icons.person, hintText:'Email', isObsecure:false
+                  CustomTextField(_passwordController,Icons.lock,'passwprd',true),
+                ],
               ),
             ),
           ],
