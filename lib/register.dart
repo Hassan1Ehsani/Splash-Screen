@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:splash_screen/widgets/custom_text_field.dart';
 
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
@@ -28,8 +29,48 @@ class _RegisterState extends State<Register> {
             ),
             Container(
               alignment: Alignment.bottomCenter,
-              child: Padding(padding: EdgeInsets.all(15),child: ,),
-            )
+              child: Padding(
+                padding: EdgeInsets.all(15),
+                child: Image.asset(
+                  'images/intro.png',
+                  height: 270,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  CustomTextField(_nameController, Icons.person, 'Name', false),
+                  CustomTextField(
+                      _phoneConfirmController, Icons.phone, 'phone', false),
+                  CustomTextField(
+                      _emailController, Icons.email, 'Email', false),
+                  CustomTextField(
+                      _passwordController, Icons.lock, 'password', true),
+                  CustomTextField(_passwordConfirmController, Icons.lock,
+                      'Confirm password', true),
+                  CustomTextField(_imageController, Icons.camera_alt_outlined,
+                      'Image URL', false),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.5,
+              child: ElevatedButton(
+                  onPressed: () {},
+                  child: Text(
+                    'SignUp',
+                    style: TextStyle(color: Colors.white),
+                  )),
+            ),
+            SizedBox(height: 20,)
           ],
         ),
       ),
