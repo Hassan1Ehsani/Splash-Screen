@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:splash_screen/authentication_screen.dart';
 
 class ErrorAlertDialog extends StatelessWidget {
-  // const ErrorAlertDialog({Key? key}) : super(key: key);
+  // const ErrorAlertDialog({Key key}) : super(key: key);
 
   final String message;
   ErrorAlertDialog(this.message);

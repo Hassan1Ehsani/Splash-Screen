@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:splash_screen/widgets/loading_widget.dart';
 
 class LoadingAlertDialog extends StatelessWidget {
-  // const LoadingAlertDialog({ Key? key }) : super(key: key);
+  // const LoadingAlertDialog({ Key key }) : super(key: key);
 
   final String message;
   LoadingAlertDialog(this.message);

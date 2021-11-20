@@ -3,7 +3,7 @@ import 'package:splash_screen/login.dart';
 import 'package:splash_screen/register.dart';
 
 class AuthenticationScreen extends StatefulWidget {
-  const AuthenticationScreen({Key? key}) : super(key: key);
+  const AuthenticationScreen({Key key}) : super(key: key);
 
   @override
   _AuthenticationScreenState createState() => _AuthenticationScreenState();
