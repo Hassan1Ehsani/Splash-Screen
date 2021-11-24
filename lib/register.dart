@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:splash_screen/DialogBox/error_dialog.dart';
 import 'package:splash_screen/global_var.dart';
-// import 'package:splash_screen/global_var.dart';
 import 'package:splash_screen/home_screen.dart';
 import 'package:splash_screen/widgets/custom_text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:firebase_storage/firebase_storage.dart';
 
 class Register extends StatefulWidget {
   const Register({Key key}) : super(key: key);
@@ -27,26 +26,33 @@ class _RegisterState extends State<Register> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Container(
               alignment: Alignment.bottomCenter,
               child: Padding(
-                padding: EdgeInsets.all(15),
+                padding: const EdgeInsets.all(15),
                 child: Image.asset(
                   'images/intro.png',
                   height: 270,
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Form(
@@ -73,13 +79,14 @@ class _RegisterState extends State<Register> {
             Container(
               width: MediaQuery.of(context).size.width * 0.5,
               child: ElevatedButton(
-                  onPressed: () {
-                    _register();
-                  },
-                  child: Text(
-                    'SignUp',
-                    style: TextStyle(color: Colors.white),
-                  )),
+                onPressed: () {
+                  _register();
+                },
+                child: Text(
+                  'SignUp',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
             ),
             SizedBox(
               height: 20,
@@ -109,9 +116,9 @@ class _RegisterState extends State<Register> {
             password: _passwordController.text.trim())
         .then((auth) {
       currentUser = auth.user;
-      getUsername = _nameController.text.trim();
-      userEmail = currentUser.email; 
       userId = currentUser.uid;
+      userEmail = currentUser.email;
+      getUsername = _nameController.text.trim();
 
       saveUserData();
     }).catchError((error) {
@@ -122,7 +129,7 @@ class _RegisterState extends State<Register> {
             return ErrorAlertDialog(error.message.toString());
             // return ErrorAlertDialog(message: error.message.toString());
           });
-    }); 
+    });
 
     // currentUser;
     if (currentUser != null) {

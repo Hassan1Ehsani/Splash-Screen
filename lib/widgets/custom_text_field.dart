@@ -6,7 +6,9 @@ class CustomTextField extends StatelessWidget {
   final IconData data;
   final String hintText;
   final bool isObsecure;
+
   CustomTextField(this.controller, this.data, this.hintText, this.isObsecure);
+
   @override
   Widget build(BuildContext context) {
     double _screenWidth = MediaQuery.of(context).size.width;
@@ -15,7 +17,9 @@ class CustomTextField extends StatelessWidget {
       width: _screenWidth * 0.5,
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(10)),
+        borderRadius: BorderRadius.all(
+          Radius.circular(10),
+        ),
       ),
       padding: EdgeInsets.all(8),
       margin: EdgeInsets.all(10),

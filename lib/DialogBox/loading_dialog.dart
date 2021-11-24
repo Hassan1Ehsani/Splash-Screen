@@ -15,7 +15,7 @@ class LoadingAlertDialog extends StatelessWidget {
         children: [
           circularProgress(),
           SizedBox(height: 10,),
-          Text('Athenticating, Please Wait...')
+          Text('Athenticating, Please Wait...'),
         ],
       ),
     );

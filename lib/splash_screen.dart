@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:splash_screen/authentication_screen.dart';
 
@@ -11,9 +10,9 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  
+
   startTimer() {
-    Timer(Duration(seconds: 5), () {
+    Timer(Duration(seconds: 2), () {
       Route newRoute =
           MaterialPageRoute(builder: (context) => AuthenticationScreen());
       Navigator.pushReplacement(context, newRoute);

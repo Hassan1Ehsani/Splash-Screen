@@ -12,13 +12,16 @@ class ErrorAlertDialog extends StatelessWidget {
       content: Text(message),
       actions: [
         ElevatedButton(
-            onPressed: () {
-              Route newRoute = MaterialPageRoute(
-                builder: (context) => AuthenticationScreen(),
-              );
-              Navigator.pushReplacement(context, newRoute);
-            },
-            child: Center(child: Text('OK'),)),
+          onPressed: () {
+            Route newRoute = MaterialPageRoute(
+              builder: (context) => AuthenticationScreen(),
+            );
+            Navigator.pushReplacement(context, newRoute);
+          },
+          child: Center(
+            child: Text('OK'),
+          ),
+        ),
       ],
     );
   }
