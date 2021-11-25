@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:splash_screen/DialogBox/error_dialog.dart';
 import 'package:splash_screen/global_var.dart';
@@ -105,7 +107,15 @@ class _RegisterState extends State<Register> {
       'imagePro': _imageController.text.trim(),
       'time': DateTime.now()
     };
-    FirebaseFirestore.instance.collection('users').doc(userId).set(userData);
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
+        .set(userData)
+        .then((value) => print("done: $userData"))
+        .catchError((e) {
+      print("oh no: ");
+      print(e);
+    });
   }
 
   void _register() async {
