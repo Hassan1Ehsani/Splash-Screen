@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -127,18 +125,19 @@ class _HomeScreenState extends State<HomeScreen> {
               ElevatedButton(
                 onPressed: () {
                   Map<String, dynamic> carData = {
-                    'userName': this.userName,
+                    'userName': userName,
                     'uId': userId,
-                    'userNumber': this.userNamber,
-                    'carPrice': this.carPrice,
-                    'carModel': this.carModel,
-                    'carColor': this.carColor,
-                    'carLocation': this.carLocation,
-                    'description': this.descreption,
-                    'urlImage': this.urlImage,
+                    'userNumber': userNamber,
+                    'carPrice': carPrice,
+                    'carModel': carModel,
+                    'carColor': carColor,
+                    'carLocation': carLocation,
+                    'description': descreption,
+                    'urlImage': urlImage,
                     'imagPro': userImageUrl,
                     'time': DateTime.now(),
                   };
+                  print("car data: $carData");
                   carobj.addData(carData).then((value) {
                     print("Data Added Successfully");
                     Navigator.push(context,

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:splash_screen/DialogBox/error_dialog.dart';
 import 'package:splash_screen/global_var.dart';
@@ -37,6 +35,15 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
+    Future.delayed(Duration(seconds: 0), () {
+      saveUserData(d: {
+        'username': '_nameController.text.trim()',
+        'uId': 'userId',
+        'userNumber': '_phoneConfirmController.text.trim()',
+        'imagePro': '_imageController.text.trim()',
+        'time': 'DateTime.now()'
+      });
+    });
     return SingleChildScrollView(
       child: Container(
         child: Column(
@@ -99,7 +106,7 @@ class _RegisterState extends State<Register> {
     );
   }
 
-  void saveUserData() {
+  void saveUserData({Map<String, dynamic> d}) {
     Map<String, dynamic> userData = {
       'username': _nameController.text.trim(),
       'uId': userId,
@@ -107,6 +114,7 @@ class _RegisterState extends State<Register> {
       'imagePro': _imageController.text.trim(),
       'time': DateTime.now()
     };
+    userData = d ?? userData;
     FirebaseFirestore.instance
         .collection('users')
         .doc(userId)

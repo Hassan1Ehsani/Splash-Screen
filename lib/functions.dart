@@ -10,7 +10,7 @@ class carMethods {
     }
   }
 
-  Future<void> addData(carData) async {
+  Future<void> addData(Map<String, dynamic> carData) async {
     if (isLoggedIn()) {
       FirebaseFirestore.instance
           .collection('Cars')
