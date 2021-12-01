@@ -1,4 +1,10 @@
+import 'dart:html';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:splash_screen/functions.dart';
+import 'package:splash_screen/global_var.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key}) : super(key: key);
@@ -8,16 +14,159 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  FirebaseAuth auth = FirebaseAuth.instance;
+
+  String userName;
+  String userNamber;
+  String carPrice;
+  String carModel;
+  String carColor;
+  String descreption;
+  String urlImage;
+  String carLocation;
+
+  QuerySnapshot cars;
+  carMethods carobj = new carMethods();
+
+  Future<bool> showDialogForAddingData() async {
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(
+              "Post a new Add",
+              style: TextStyle(
+                  fontSize: 24, fontFamily: "Bebas", letterSpacing: 2),
+            ),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  decoration: InputDecoration(hintText: "Enter Your Name"),
+                  onChanged: (value) {
+                    this.userName = value;
+                  },
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                TextField(
+                  decoration:
+                      InputDecoration(hintText: "Enter Your Phone Number"),
+                  onChanged: (value) {
+                    this.userNamber = value;
+                  },
+                ),
+                TextField(
+                  decoration: InputDecoration(hintText: "Enter Car Price"),
+                  onChanged: (value) {
+                    this.carPrice = value;
+                  },
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                TextField(
+                  decoration: InputDecoration(hintText: "Enter Car Name"),
+                  onChanged: (value) {
+                    this.carModel = value;
+                  },
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                TextField(
+                  decoration: InputDecoration(hintText: "Enter Car Color"),
+                  onChanged: (value) {
+                    this.carColor = value;
+                  },
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                TextField(
+                  decoration: InputDecoration(hintText: "Enter Car Location"),
+                  onChanged: (value) {
+                    this.carLocation = value;
+                  },
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                TextField(
+                  decoration:
+                      InputDecoration(hintText: "Write Car Description"),
+                  onChanged: (value) {
+                    this.descreption = value;
+                  },
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                TextField(
+                  decoration: InputDecoration(hintText: "Enter image URL"),
+                  onChanged: (value) {
+                    this.urlImage = value;
+                  },
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+              ],
+            ),
+            actions: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text(
+                  "Cancel",
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Map<String, dynamic> carData = {
+                    'userName': this.userName,
+                    'uId': userId,
+                    'userNumber': this.userNamber,
+                    'carPrice': this.carPrice,
+                    'carModel': this.carModel,
+                    'carColor': this.carColor,
+                    'carLocation': this.carLocation,
+                    'description': this.descreption,
+                    'urlImage': this.urlImage,
+                    'imagPro': userImageUrl,
+                    'time': DateTime.now(),
+                  };
+                  carobj.addData(carData).then((value) {
+                    print("Data Added Successfully");
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()));
+                  }).catchError((onError) {
+                    print(onError);
+                  });
+                },
+                child: Text(
+                  "Add Now",
+                ),
+              ),
+            ],
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.refresh,
-              color: Colors.white,
-            )),
+          onPressed: () {},
+          icon: Icon(
+            Icons.refresh,
+            color: Colors.white,
+          ),
+        ),
         actions: [
           TextButton(
             onPressed: () {},
@@ -65,7 +214,9 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton(
         tooltip: 'Add Post',
         child: Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () {
+          showDialogForAddingData();
+        },
       ),
     );
   }
