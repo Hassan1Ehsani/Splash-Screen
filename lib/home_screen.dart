@@ -155,8 +155,134 @@ class _HomeScreenState extends State<HomeScreen> {
         });
   }
 
+  getMyData() {
+    FirebaseFirestore.instance.collection('users').doc(userId).get().then(
+      (result) {
+        setState(
+          () {
+            userImageUrl = result.data()['imgPro'];
+            getUsername = result.data()['username'];
+          },
+        );
+      },
+    );
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    userId = FirebaseAuth.instance.currentUser.uid;
+    userEmail = FirebaseAuth.instance.currentUser.email;
+
+    carobj.getData().then((result) {
+      setState(() {
+        cars = result;
+      });
+    });
+    getMyData();
+  }
+
   @override
   Widget build(BuildContext context) {
+    Widget showCarsList() {
+      if (cars != null) {
+        return ListView.builder(
+          itemCount: cars.docs.length,
+          padding: EdgeInsets.all(8.0),
+          itemBuilder: (context, i) {
+            return Card(
+              child: Column(
+                children: [
+                  ListTile(
+                    leading: GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        width: 60,
+                        height: 60,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                              image: NetworkImage(
+                                cars.docs[i].data()['imgPro'],
+                              ),
+                              fit: BoxFit.fill),
+                        ),
+                      ),
+                    ),
+                    title: GestureDetector(
+                      onTap: () {},
+                      child: Text(
+                        cars.docs[i].data()['username'],
+                      ),
+                    ),
+                    subtitle: GestureDetector(
+                      onTap: () {},
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            cars.docs[i].data()['carLocation'],
+                            style: TextStyle(
+                              color: Colors.black.withOpacity(0.6),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 4.0,
+                          ),
+                          Icon(
+                            Icons.location_pin,
+                            color: Colors.grey,
+                          ),
+                        ],
+                      ),
+                    ),
+                    trailing: cars.docs[i].data()['uId'] == userId
+                        ? Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              GestureDetector(
+                                onTap: () {},
+                                child: Icon(Icons.edit_outlined),
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              GestureDetector(
+                                onDoubleTap: () {},
+                                child: Icon(Icons.delete_forever_sharp),
+                              ),
+                            ],
+                          )
+                        : Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [],
+                          ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Image.network(
+                      cars.docs[i].data()['urlImage'],fit: BoxFit.fill,
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 10),
+                  child:Text('\$'+cars.docs[i].data()['carPrice'],
+                  style: TextStyle(
+                    fontFamily: "Bebas",
+                    letterSpacing: 2,
+                    fontSize: 24,),
+                    ),
+                  ),
+                ],
+                  
+              ),
+            );
+          },
+        );
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
