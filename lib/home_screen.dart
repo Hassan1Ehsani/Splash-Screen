@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:splash_screen/functions.dart';
 import 'package:splash_screen/global_var.dart';
+import 'package:timeago/timeago.dart' as tAgo;
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key}) : super(key: key);
@@ -175,11 +177,15 @@ class _HomeScreenState extends State<HomeScreen> {
     userId = FirebaseAuth.instance.currentUser.uid;
     userEmail = FirebaseAuth.instance.currentUser.email;
 
-    carobj.getData().then((result) {
-      setState(() {
-        cars = result;
-      });
-    });
+    carobj.getData().then(
+      (result) {
+        setState(
+          () {
+            cars = result;
+          },
+        );
+      },
+    );
     getMyData();
   }
 
@@ -262,20 +268,55 @@ class _HomeScreenState extends State<HomeScreen> {
                   Padding(
                     padding: EdgeInsets.all(16),
                     child: Image.network(
-                      cars.docs[i].data()['urlImage'],fit: BoxFit.fill,
+                      cars.docs[i].data()['urlImage'],
+                      fit: BoxFit.fill,
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.only(left: 10),
-                  child:Text('\$'+cars.docs[i].data()['carPrice'],
-                  style: TextStyle(
-                    fontFamily: "Bebas",
-                    letterSpacing: 2,
-                    fontSize: 24,),
+                    child: Text(
+                      '\$' + cars.docs[i].data()['carPrice'],
+                      style: TextStyle(
+                        fontFamily: "Bebas",
+                        letterSpacing: 2,
+                        fontSize: 24,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 15, right: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(Icons.directions_car),
+                            Padding(
+                              padding: EdgeInsets.only(left: 10),
+                              child: Align(
+                                child: Text(
+                                  cars.docs[i].data()['carModel'],
+                                ),
+                                alignment: Alignment.topLeft,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Icon(Icons.watch_later_outlined),
+                            Padding(
+                              padding: EdgeInsets.only(left: 10),
+                              child: Align(
+                                child: Text(tAgo.format((cars.docs[i].data()['time']).toDate())),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                 ],
-                  
               ),
             );
           },
