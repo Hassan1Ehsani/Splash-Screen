@@ -5,7 +5,6 @@ import 'package:splash_screen/functions.dart';
 import 'package:splash_screen/global_var.dart';
 import 'package:timeago/timeago.dart' as tAgo;
 
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key}) : super(key: key);
 
@@ -308,8 +307,63 @@ class _HomeScreenState extends State<HomeScreen> {
                             Padding(
                               padding: EdgeInsets.only(left: 10),
                               child: Align(
-                                child: Text(tAgo.format((cars.docs[i].data()['time']).toDate())),
+                                child: Text(tAgo.format(
+                                    (cars.docs[i].data()['time']).toDate())),
                               ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 15, right: 15),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Icon(Icons.brush_outlined),
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 10),
+                                        child: Align(
+                                          child: Text(
+                                              cars.docs[i].data()['carColor']),
+                                          alignment: Alignment.topLeft,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Icon(Icons.phone_android),
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 10),
+                                        child: Align(
+                                          child: Text(cars.docs[i]
+                                              .data()['userNumber']),
+                                          alignment: Alignment.topLeft,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 15, right: 15),
+                              child: Text(
+                                cars.docs[i].data()['description'],
+                                textAlign: TextAlign.justify,
+                                style: TextStyle(
+                                  color: Colors.black.withOpacity(0.6),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
                             ),
                           ],
                         ),
@@ -321,6 +375,8 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           },
         );
+      } else {
+        return Text('loading...');
       }
     }
 
@@ -375,7 +431,9 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text("Home Page"),
       ),
       body: Center(
-        child: Container(),
+        child: Container(
+          child: showCarsList(),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         tooltip: 'Add Post',
