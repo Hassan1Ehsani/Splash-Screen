@@ -5,7 +5,7 @@ import 'package:splash_screen/home_screen.dart';
 import 'package:splash_screen/widgets/custom_text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class Register extends StatefulWidget {
   const Register({Key key}) : super(key: key);

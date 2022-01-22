@@ -60,7 +60,8 @@ class _LoginState extends State<Login> {
                           builder: (con) {
                             return ErrorAlertDialog(
                                 "Please the write the required info for the login");
-                          });
+                          },
+                        );
                 },
                 child: Text(
                   'Log in',

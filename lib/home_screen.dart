@@ -307,8 +307,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             Padding(
                               padding: EdgeInsets.only(left: 10),
                               child: Align(
-                                child: Text(tAgo.format(
-                                    (cars.docs[i].data()['time']).toDate())),
+                                child: Text(
+                                  tAgo.format(
+                                    (cars.docs[i].data()['time']).toDate(),
+                                  ),
+                                ),
                               ),
                             ),
                             SizedBox(
